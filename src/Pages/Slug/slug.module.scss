@@ -1,0 +1,13 @@
+.container {
+  margin: 0 auto;
+  height: calc(100vh - 8rem - 3rem);
+  overflow: scroll;
+  padding-top: 2.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--info-color) var(--background-color-base);
+}
+
+.err {
+  display: flex;
+  flex-direction: column;
+}

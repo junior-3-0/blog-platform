@@ -1,0 +1,32 @@
+.error {
+  position: relative;
+  top: 50%;
+  transform: translateY(-70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  .header {
+    font-size: var(--font-size-err-header);
+    color: var(--text-color);
+  }
+
+  .text {
+    font-size: var(--font-size-lg);
+    color: var(--text-color-secondary);
+  }
+
+  .err {
+    color: tomato;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+.rout_err {
+  margin-top: 30%;
+}

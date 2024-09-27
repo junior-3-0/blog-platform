@@ -1,0 +1,45 @@
+.header {
+  background-color: var(--background-color-base);
+  display: flex;
+  align-items: center;
+  height: 8rem;
+  padding-inline: 2.2rem;
+  font-family: Inter;
+  font-size: var(--font-size-md);
+  line-height: 2.8rem;
+  color: var(--heading-color);
+
+  .logo {
+    display: block;
+    text-decoration: none;
+    margin-right: auto;
+    color: var(--heading-color);
+    transition: all 0.5s ease;
+  }
+
+  .logo:hover {
+    color: var(--info-color);
+  }
+
+  .login {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .sign_in,
+  .sign_up {
+    color: inherit;
+    padding: 1rem 1.8rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+  }
+
+  .sign_in {
+    border: none;
+  }
+
+  .sign_up {
+    border: 0.1rem solid var(--success-color);
+    color: var(--success-color);
+  }
+}
