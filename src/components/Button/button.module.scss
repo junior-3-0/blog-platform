@@ -1,0 +1,17 @@
+.button {
+  width: 100%;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--info-color);
+  color: var(--background-color-base);
+  border: 0.1rem solid var(--info-color);
+  border-radius: 0.4rem;
+  font-family: Roboto;
+  font-size: 1.6rem;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 2.4rem;
+  margin-bottom: 0.8rem;
+}

@@ -1,0 +1,22 @@
+.login {
+  display: flex;
+  gap: 2rem;
+
+  .sign_in,
+  .sign_up {
+    color: inherit;
+    padding: 1rem 1.8rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  .sign_in {
+    border: none;
+  }
+
+  .sign_up {
+    border: 0.1rem solid var(--success-color);
+    color: var(--success-color);
+  }
+}

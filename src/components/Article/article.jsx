@@ -26,7 +26,7 @@ export default function Article({
         <div className={styles.wrap}>
           <div className={styles.inner_wrap}>
             <Link to={`/articles/${slug}`} className={styles.title}>
-              {title}
+              {truncate(title, 30)}
             </Link>
             <img src="../heart.svg" alt="likes" className={styles.likes_img} />
             <div className={styles.likes}>{favoritesCount}</div>
