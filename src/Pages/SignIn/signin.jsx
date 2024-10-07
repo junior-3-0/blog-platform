@@ -5,7 +5,7 @@ import { TitleForm } from "../../components/TitleForm/titleForm";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFetch } from "../../store/signup.slice";
-import { Input } from "../../components/Input/input";
+import Input from "../../components/Input/Input";
 import { validateEmail, validateRequired } from "../../helpers/validateObj";
 
 export function SignIn() {
