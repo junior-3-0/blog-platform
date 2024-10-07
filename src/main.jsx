@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
-import "./index.scss";
 import Error from "./Pages/Error/error";
 import List from "./Pages/List/list";
 import Slug from "./Pages/Slug/slug";
@@ -14,6 +13,9 @@ import { SignIn } from "./Pages/SignIn/signin";
 import { RequestAuth } from "./helpers/requestAuth";
 import { EditProfile } from "./Pages/EditProfile/editProfile";
 import { RequestAuth2 } from "./helpers/requestAuth2";
+import { CreateArticle } from "./Pages/CreateArticle/createArticle";
+import { EditArticle } from "./Pages/EditArticle/editArticle";
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,30 @@ const router = createBrowserRouter([
             <EditProfile />
           </RequestAuth2>
         ),
+      },
+      {
+        path: "/new-article",
+        element: (
+          <RequestAuth2>
+            <CreateArticle />
+          </RequestAuth2>
+        ),
+      },
+      {
+        path: "/articles/:slug/edit",
+        element: (
+          <RequestAuth2>
+            <EditArticle />
+          </RequestAuth2>
+        ),
+        errorElement: <Error err={"Server Error"} />,
+        loader: async ({ params }) => {
+          return defer({
+            data: axios
+              .get(`https://blog.kata.academy/api/articles/${params.slug}`)
+              .then((data) => data),
+          });
+        },
       },
     ],
   },

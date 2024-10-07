@@ -1,0 +1,134 @@
+.wraper {
+  margin: 0 auto;
+  margin-top: 3.4rem;
+  max-width: 93.8rem;
+  padding: 4.8rem 3.2rem;
+  background-color: var(--background-color-base);
+  display: flex;
+  flex-direction: column;
+  gap: 2.1rem;
+
+  .title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-family: Roboto;
+    font-weight: 500;
+    line-height: 2.8rem;
+    color: #262626;
+    text-align: center;
+  }
+
+  .input_wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .label {
+    font-family: Roboto;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+    color: #262626;
+  }
+
+  .input {
+    padding: 0.8rem 1.2rem;
+    font-family: Roboto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    color: var(--text-color);
+    border: 0.1rem solid #d9d9d9;
+    border-radius: 0.4rem;
+  }
+
+  .input::placeholder {
+    font-family: Roboto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    color: #bfbfbf;
+  }
+
+  .textarea {
+    resize: none;
+    height: 16.8rem;
+  }
+
+  .tag_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tag_inner_wrap {
+    display: flex;
+    gap: 1.8rem;
+  }
+
+  .tag {
+    width: 30rem;
+    padding: 0.8rem 1.2rem;
+    font-family: Roboto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    color: var(--text-color);
+    border: 0.1rem solid #d9d9d9;
+    border-radius: 0.4rem;
+  }
+
+  .input_tag {
+    width: 30rem;
+  }
+
+  .delete,
+  .add {
+    padding: 0.8rem 1.6rem;
+    width: 11.8rem;
+    text-align: center;
+    border: 0.1rem solid #f5222d;
+    border-radius: 0.4rem;
+    font-family: Roboto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    color: #f5222d;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .add {
+    color: var(--info-color);
+    border: 0.1rem solid var(--info-color);
+  }
+
+  .send {
+    padding: 0.8rem 1.6rem;
+    width: 31.9rem;
+    color: var(--background-color-base);
+    background-color: var(--info-color);
+    border: 0.1rem solid var(--info-color);
+    border-radius: 0.4rem;
+    font-family: Roboto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    cursor: pointer;
+  }
+
+  .error {
+    color: #f5222d;
+    border-color: #f5222d;
+    outline-color: #f5222d;
+  }
+
+  .error_message {
+    position: absolute;
+    bottom: -1.5rem;
+    color: #f5222d;
+    font-size: 1.2rem;
+  }
+}

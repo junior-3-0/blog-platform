@@ -1,17 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+import { getToken } from "../helpers/getJwtLocalStorage";
 
 const initialState = {
   user: {},
 };
 
+const setItem = (data) => localStorage.setItem("user", JSON.stringify(data));
+
 export const signupFetch = createAsyncThunk(
   "signupSlice/signupFetch",
   async (body) => {
-    const localData = JSON.parse(localStorage.getItem("user"));
-
-    if (localData) {
-      return localData;
+    if (getToken()) {
+      return;
     }
     try {
       const { data } = await axios.post(
@@ -29,7 +30,7 @@ export const signupFetch = createAsyncThunk(
           },
         }
       );
-      localStorage.setItem("user", JSON.stringify(data));
+      setItem(data);
       return data;
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -54,7 +55,7 @@ export const loginFetch = createAsyncThunk(
           },
         }
       );
-      localStorage.setItem("user", JSON.stringify(data));
+      setItem(data);
       return data;
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -68,7 +69,6 @@ export const editFetch = createAsyncThunk(
   "signupSlice/editFetch",
   async (body) => {
     try {
-      const { token } = JSON.parse(localStorage.getItem("user")).user;
       const { data } = await axios.put(
         "https://blog.kata.academy/api/user",
         {
@@ -77,11 +77,11 @@ export const editFetch = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         }
       );
-      localStorage.setItem("user", JSON.stringify(data));
+      setItem(data);
       return data;
     } catch (e) {
       if (e instanceof AxiosError) {

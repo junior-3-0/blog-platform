@@ -21,9 +21,7 @@ export function SignIn() {
     <div className={styles.signin}>
       <form
         className={styles.form}
-        onSubmit={handleSubmit((data) => {
-          dispatch(loginFetch(data));
-        })}
+        onSubmit={handleSubmit((data) => dispatch(loginFetch(data)))}
       >
         <TitleForm>Sign In</TitleForm>
         {errorMessageLogin && (

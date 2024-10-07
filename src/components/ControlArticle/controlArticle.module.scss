@@ -1,0 +1,27 @@
+.button_wrap {
+  position: absolute;
+  top: 8rem;
+  right: 0;
+  display: flex;
+  gap: 1.2rem;
+
+  .button {
+    padding: 0.6rem 1.7rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  .delete {
+    color: var(--error-color);
+    border: 0.1rem solid var(--error-color);
+  }
+
+  .edit {
+    color: var(--success-color);
+    border: 0.1rem solid var(--success-color);
+  }
+}

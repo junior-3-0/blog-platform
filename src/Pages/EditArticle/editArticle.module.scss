@@ -1,0 +1,12 @@
+.wrap {
+  height: calc(100vh - 11rem);
+  overflow: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--info-color) var(--background-color-base);
+
+  .error {
+    position: absolute;
+    right: 5rem;
+    top: 13rem;
+  }
+}

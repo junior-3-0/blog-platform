@@ -21,6 +21,13 @@ export function Input({
   const click = () => {
     if (inputPass.flag) {
       isInputPass({ src: "../free-icon-hide.png", flag: false, type: "text" });
+      setTimeout(() => {
+        isInputPass({
+          src: "../free-icon-eye.png",
+          flag: true,
+          type: "password",
+        });
+      }, 3000);
     } else {
       isInputPass({
         src: "../free-icon-eye.png",

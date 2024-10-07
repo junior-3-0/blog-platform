@@ -16,7 +16,7 @@ export function UserLogIn() {
 
   return (
     <div className={styles.wraper}>
-      <Link to="/" className={styles.create}>
+      <Link to="/new-article" className={styles.create}>
         Create article
       </Link>
       <div className={styles.user}>
