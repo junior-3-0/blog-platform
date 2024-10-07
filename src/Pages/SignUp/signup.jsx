@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { signupFetch } from "../../store/signup.slice";
-import { Input } from "../../components/Input/input";
 import {
   validateEmail,
   validatePasswordRequired,
@@ -14,6 +13,7 @@ import {
   validateRequired,
   validateUsername,
 } from "../../helpers/validateObj";
+import Input from "../../components/Input/Input";
 
 export default function SignUp() {
   const {
@@ -46,6 +46,7 @@ export default function SignUp() {
             type={"text"}
             validate={validateUsername}
           >
+            {" "}
             Username
           </Input>
           <Input

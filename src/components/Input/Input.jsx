@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./input.module.scss";
 import cn from "classnames";
 
-export function Input({
+export default function Input({
   children,
   register,
   errors,
