@@ -11,9 +11,6 @@ const setItem = (data) => localStorage.setItem("user", JSON.stringify(data));
 export const signupFetch = createAsyncThunk(
   "signupSlice/signupFetch",
   async (body) => {
-    if (getToken()) {
-      return;
-    }
     try {
       const { data } = await axios.post(
         "https://blog.kata.academy/api/users",
@@ -91,6 +88,25 @@ export const editFetch = createAsyncThunk(
   }
 );
 
+export const reloadFetch = createAsyncThunk(
+  "signupSlice/reloadFetch",
+  async () => {
+    try {
+      const { data } = await axios.get("https://blog.kata.academy/api/user", {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      setItem(data);
+      return data;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw e.message;
+      }
+    }
+  }
+);
+
 export const signupSlice = createSlice({
   name: "signupSlice",
   initialState,
@@ -145,6 +161,23 @@ export const signupSlice = createSlice({
       state.errorMessageEdit = "";
     });
     builder.addCase(editFetch.rejected, (state, action) => {
+      if (action.error.message === "Request failed with status code 500") {
+        state.errorMessageEdit = "Username or email is already taken";
+      } else {
+        state.errorMessageEdit = action.error.message;
+      }
+    });
+
+    builder.addCase(reloadFetch.fulfilled, (state, action) => {
+      if (!action.payload) {
+        return;
+      }
+      state.user = action.payload;
+    });
+    builder.addCase(reloadFetch.pending, (state) => {
+      state.errorMessageEdit = "";
+    });
+    builder.addCase(reloadFetch.rejected, (state, action) => {
       if (action.error.message === "Request failed with status code 500") {
         state.errorMessageEdit = "Username or email is already taken";
       } else {
