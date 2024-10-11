@@ -1,65 +1,64 @@
-import { useForm } from "react-hook-form";
-import styles from "./formArticle.module.scss";
-import cn from "classnames";
-import { validateRequired } from "../../helpers/validateObj";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import cn from 'classnames'
+
+import { validateRequired } from '../../helpers/validateObj'
+
+import styles from './formArticle.module.scss'
 
 export function FormArticle({ article, fn }) {
-  const [inputValue, isInputValue] = useState("");
-  const [tagList, isTagList] = useState([]);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [inputValue, isInputValue] = useState('')
+  const [tagList, isTagList] = useState([])
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm();
-  const onchange = (e) => isInputValue(e.target.value);
+  } = useForm()
+  const onchange = (e) => isInputValue(e.target.value)
   const add = () => {
     if (tagList.includes(inputValue)) {
-      isInputValue("");
-      return;
+      isInputValue('')
+      return
     }
-    isTagList((state) => [...state, inputValue]);
-    isInputValue("");
-  };
+    isTagList((state) => [...state, inputValue])
+    isInputValue('')
+  }
   const deleteTag = (e) => {
-    const prevElem = e.target.previousElementSibling;
-    isTagList((state) => state.filter((tag) => tag !== prevElem.innerHTML));
-  };
+    const prevElem = e.target.previousElementSibling
+    isTagList((state) => state.filter((tag) => tag !== prevElem.innerHTML))
+  }
 
   useEffect(() => {
     if (article) {
-      const { title, description, body, tagList } = article;
-      setValue("title", title);
-      setValue("description", description);
-      setValue("body", body);
-      isTagList(tagList);
+      const { title, description, body, tagList: tags } = article
+      setValue('title', title)
+      setValue('description', description)
+      setValue('body', body)
+      isTagList(tags)
     }
-  }, []);
+  }, [])
 
   return (
     <form
       className={styles.wraper}
       onSubmit={handleSubmit((data) => {
-        data.tagList = tagList;
+        data.tagList = tagList
         dispatch(fn({ body: data, slug: article?.slug })).then((response) => {
           if (!response.error) {
-            new Promise((res) => {
-              setTimeout(() => {
-                if (!response.payload) {
-                  return res(navigate(`/articles/${article?.slug}`));
-                }
-                return res(
-                  navigate(`/articles/${response.payload?.article?.slug}`)
-                );
-              }, 100);
-            });
+            setTimeout(() => {
+              if (!response.payload) {
+                return navigate(`/articles/${article?.slug}`)
+              }
+              return navigate(`/articles/${response.payload?.article?.slug}`)
+            }, 100)
           }
-        });
+        })
       })}
     >
       <h2 className={styles.title}>Create new article</h2>
@@ -74,11 +73,9 @@ export function FormArticle({ article, fn }) {
           type="text"
           placeholder="Title"
           id="title"
-          {...register("title", validateRequired)}
+          {...register('title', validateRequired)}
         />
-        {errors.title?.message && (
-          <div className={styles.error_message}>{errors.title?.message}</div>
-        )}
+        {errors.title?.message && <div className={styles.error_message}>{errors.title?.message}</div>}
       </div>
       <div className={styles.input_wrap}>
         <label className={styles.label} htmlFor="description">
@@ -91,13 +88,9 @@ export function FormArticle({ article, fn }) {
           type="text"
           placeholder="Title"
           id="description"
-          {...register("description", validateRequired)}
+          {...register('description', validateRequired)}
         />
-        {errors.description?.message && (
-          <div className={styles.error_message}>
-            {errors.description?.message}
-          </div>
-        )}
+        {errors.description?.message && <div className={styles.error_message}>{errors.description?.message}</div>}
       </div>
       <div className={styles.input_wrap}>
         <label className={styles.label} htmlFor="body">
@@ -109,11 +102,9 @@ export function FormArticle({ article, fn }) {
           })}
           placeholder="Text"
           id="body"
-          {...register("body", validateRequired)}
+          {...register('body', validateRequired)}
         />
-        {errors.body?.message && (
-          <div className={styles.error_message}>{errors.body?.message}</div>
-        )}
+        {errors.body?.message && <div className={styles.error_message}>{errors.body?.message}</div>}
       </div>
       <div className={styles.tag_wrap}>
         <label className={styles.label} htmlFor="tagList">
@@ -148,5 +139,5 @@ export function FormArticle({ article, fn }) {
         Send
       </button>
     </form>
-  );
+  )
 }

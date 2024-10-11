@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import styles from "./userLogOut.module.scss";
+import { Link } from 'react-router-dom'
+
+import styles from './userLogOut.module.scss'
 
 export function UserLogOut() {
   return (
@@ -11,5 +12,5 @@ export function UserLogOut() {
         Sign Up
       </Link>
     </div>
-  );
+  )
 }

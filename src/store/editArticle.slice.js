@@ -1,48 +1,48 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
-import { getToken } from "../helpers/getJwtLocalStorage";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios, { AxiosError } from 'axios'
 
-export const editFetch = createAsyncThunk(
-  "editArticleSlice/editFetch",
-  async ({ body, slug }) => {
-    try {
-      const { data } = axios.put(
-        `https://blog.kata.academy/api/articles/${slug}`,
-        {
-          article: body,
+import { getToken } from '../helpers/getJwtLocalStorage'
+import { URL } from '../main'
+
+export const editFetch = createAsyncThunk('editArticleSlice/editFetch', async ({ body, slug }) => {
+  try {
+    const { data } = axios.put(
+      `${URL}articles/${slug}`,
+      {
+        article: body,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getToken()}`,
-          },
-        }
-      );
-      return data;
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        throw e.message;
       }
+    )
+    return data
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw e.message
     }
   }
-);
+  return true
+})
 
 export const editArticleSlice = createSlice({
-  name: "editArticle",
+  name: 'editArticle',
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(editFetch.fulfilled, (state) => {
-      state.errorEditMessage = "";
-    });
+      state.errorEditMessage = ''
+    })
     builder.addCase(editFetch.pending, (state) => {
-      state.errorEditMessage = "";
-    });
+      state.errorEditMessage = ''
+    })
     builder.addCase(editFetch.rejected, (state, action) => {
-      state.errorEditMessage = action.error.message;
-    });
+      state.errorEditMessage = action.error.message
+    })
   },
-});
+})
 
-export default editArticleSlice.reducer;
-export const editAction = editArticleSlice.actions;
+export default editArticleSlice.reducer
+export const editAction = editArticleSlice.actions

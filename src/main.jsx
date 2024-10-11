@@ -1,49 +1,50 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
-import Error from "./Pages/Error/error";
-import List from "./Pages/List/list";
-import Slug from "./Pages/Slug/slug";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-import Layout from "./Layout/layout";
-import axios from "axios";
-import SignUp from "./Pages/SignUp/signup";
-import { SignIn } from "./Pages/SignIn/signin";
-import { RequestAuth } from "./helpers/requestAuth";
-import { EditProfile } from "./Pages/EditProfile/editProfile";
-import { RequestAuth2 } from "./helpers/requestAuth2";
-import { CreateArticle } from "./Pages/CreateArticle/createArticle";
-import { EditArticle } from "./Pages/EditArticle/editArticle";
-import "./index.scss";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { createBrowserRouter, defer, RouterProvider } from 'react-router-dom'
+import axios from 'axios'
+
+import Error from './Pages/Error'
+import List from './Pages/List'
+import Slug from './Pages/Slug'
+import { store } from './store/store'
+import Layout from './Layout'
+import SignUp from './Pages/SignUp'
+import { SignIn } from './Pages/SignIn'
+import { RequestAuth } from './helpers/requestAuth'
+import { EditProfile } from './Pages/EditProfile'
+import { RequestAuth2 } from './helpers/requestAuth2'
+import { CreateArticle } from './Pages/CreateArticle'
+import { EditArticle } from './Pages/EditArticle'
+
+import './index.scss'
+
+export const URL = 'https://blog-platform.kata.academy/api/'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <List />,
       },
       {
-        path: "/articles",
+        path: '/articles',
         element: <List />,
       },
       {
-        path: "/articles/:slug",
+        path: '/articles/:slug',
         element: <Slug />,
-        errorElement: <Error err={"Server Error"} />,
-        loader: async ({ params }) => {
-          return defer({
-            data: axios
-              .get(`https://blog.kata.academy/api/articles/${params.slug}`)
-              .then((data) => data),
-          });
-        },
+        errorElement: <Error err="Server Error" />,
+        loader: async ({ params }) =>
+          defer({
+            data: axios.get(`${URL}articles/${params.slug}`).then((data) => data),
+          }),
       },
       {
-        path: "/sign-up",
+        path: '/sign-up',
         element: (
           <RequestAuth>
             <SignUp />
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/sign-in",
+        path: '/sign-in',
         element: (
           <RequestAuth>
             <SignIn />
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile",
+        path: '/profile',
         element: (
           <RequestAuth2>
             <EditProfile />
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/new-article",
+        path: '/new-article',
         element: (
           <RequestAuth2>
             <CreateArticle />
@@ -75,33 +76,30 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/articles/:slug/edit",
+        path: '/articles/:slug/edit',
         element: (
           <RequestAuth2>
             <EditArticle />
           </RequestAuth2>
         ),
-        errorElement: <Error err={"Server Error"} />,
-        loader: async ({ params }) => {
-          return defer({
-            data: axios
-              .get(`https://blog.kata.academy/api/articles/${params.slug}`)
-              .then((data) => data),
-          });
-        },
+        errorElement: <Error err="Server Error" />,
+        loader: async ({ params }) =>
+          defer({
+            data: axios.get(`${URL}articles/${params.slug}`).then((data) => data),
+          }),
       },
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <Error />,
   },
-]);
+])
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
   </StrictMode>
-);
+)
